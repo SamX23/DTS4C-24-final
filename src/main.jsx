@@ -1,9 +1,12 @@
-import React from "react";
+import React, { Profiler } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
-import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
-import ErrorPage from "./error-page";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ErrorPage from "./pages/error";
+import Login from "./pages/login";
+import Wishlist from "./pages/wishlist";
+import Profile from "./pages/profile";
 
 const router = createBrowserRouter([
   {
@@ -13,7 +16,15 @@ const router = createBrowserRouter([
   },
   {
     path: "login",
-    element: <div>Login</div>,
+    element: <Login />,
+  },
+  {
+    path: "wishlist",
+    element: <Wishlist />,
+  },
+  {
+    path: "profile",
+    element: <Profile />,
   },
 ]);
 
