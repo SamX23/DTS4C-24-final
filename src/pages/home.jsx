@@ -6,8 +6,8 @@ const Home = () => {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="App">
-      <div>
+    <div className="bg-slate-900 min-h-screen p-2 text-center text-white">
+      <div className="flex justify-center">
         <a href="https://vitejs.dev" target="_blank">
           <img src="/vite.svg" className="logo" alt="Vite logo" />
         </a>
@@ -15,7 +15,7 @@ const Home = () => {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1 className="text-3xl font-bold underline">Vite + React</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
