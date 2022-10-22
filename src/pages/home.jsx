@@ -1,34 +1,47 @@
-import reactLogo from "../assets/react.svg";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { TMDB_IMG, TMDB_KEY, TMDB_URL } from "../hooks/env";
 
 const Home = () => {
-  const [count, setCount] = useState(0);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch(`${TMDB_URL}/trending/movie/week?api_key=${TMDB_KEY}`)
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        setData(res.results);
+      });
+  }, []);
 
   return (
-    <div className="bg-slate-900 min-h-screen p-2 text-center text-white">
-      <div className="flex justify-center">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1 className="text-3xl font-bold underline">Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <Link to={`login`}>LOGIN HERE</Link>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    <>
+      <main className="my-14">
+        <h1 className="font-bold">Movie list here</h1>
+
+        <div className="flex gap-2 flex-wrap justify-center my-4">
+          {data?.map((item) => (
+            <div
+              key={item.id}
+              className="border border-l-slate-400 rounded p-4 hover:bg-slate-700 w-1/4"
+            >
+              <img
+                src={`${TMDB_IMG}/${item.poster_path}`}
+                alt={item.title}
+                width="100%"
+                height="100%"
+                className="rounded"
+              />
+              <p>{item.title}</p>
+              <p className="text-slate-500 overflow-hidden h-36">
+                {item.overview}
+              </p>
+            </div>
+          ))}
+        </div>
+      </main>
+
+      <footer>Made with coffee by Sami</footer>
+    </>
   );
 };
 
