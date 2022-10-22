@@ -17,13 +17,13 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
+    sessionStorage.removeItem("user");
     navigate("/login", { replace: true });
   };
 
-  const checkUser = async () => {
+  const checkUser = () => {
     const userExist = sessionStorage.getItem("user");
-
-    await setUser(userExist);
+    userExist && setUser(userExist);
   };
 
   const value = useMemo(
