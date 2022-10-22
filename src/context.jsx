@@ -11,12 +11,19 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (data) => {
     setUser(data);
-    navigate("/profile");
+    sessionStorage.setItem("user", JSON.stringify(data));
+    navigate("/");
   };
 
   const logout = () => {
     setUser(null);
-    navigate("/", { replace: true });
+    navigate("/login", { replace: true });
+  };
+
+  const checkUser = async () => {
+    const userExist = sessionStorage.getItem("user");
+
+    await setUser(userExist);
   };
 
   const value = useMemo(
@@ -24,6 +31,7 @@ export const AuthProvider = ({ children }) => {
       user,
       login,
       logout,
+      checkUser,
     }),
     [user]
   );
