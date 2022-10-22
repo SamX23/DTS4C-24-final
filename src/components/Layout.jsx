@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../context";
+import { useAuth } from "../hooks/context";
 import Navigation from "./Navigation";
 
 const Layout = () => {
