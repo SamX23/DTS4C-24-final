@@ -1,29 +1,26 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useStore } from "./store";
 
-const AuthContext = createContext(null);
+const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const dispatch = useStore((state) => state.dispatch);
+  const user = useStore((state) => state.user);
   const navigate = useNavigate();
 
   const login = async (data) => {
-    setUser(data);
+    dispatch({ type: "LOGIN", data });
     sessionStorage.setItem("user", JSON.stringify(data));
     navigate("/");
   };
 
   const logout = () => {
-    setUser(null);
+    dispatch({ type: "LOGOUT" });
     sessionStorage.removeItem("user");
     navigate("/login", { replace: true });
-  };
-
-  const checkUser = () => {
-    const userExist = sessionStorage.getItem("user");
-    userExist && setUser(userExist);
   };
 
   const value = useMemo(
@@ -31,7 +28,6 @@ export const AuthProvider = ({ children }) => {
       user,
       login,
       logout,
-      checkUser,
     }),
     [user]
   );
