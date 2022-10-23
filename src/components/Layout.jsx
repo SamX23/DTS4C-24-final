@@ -1,27 +1,25 @@
-import { useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../hooks/context";
+import Container from "./Container";
 import Navigation from "./Navigation";
 
 const Layout = () => {
-  const { user, checkUser } = useAuth();
-
-  useEffect(() => checkUser(), []);
+  const { user } = useAuth();
 
   return (
-    <>
-      {user ? (
-        <div className="relative bg-slate-900 min-h-screen p-2 text-center text-white">
-          <div className="container">
-            <Navigation />
-
-            <Outlet />
-          </div>
-        </div>
-      ) : (
+    <Container>
+      {!user ? (
         <Navigate to="/login" />
+      ) : (
+        <>
+          <Navigation />
+          <main className="my-14">
+            <Outlet />
+          </main>
+          <footer>Made with coffee by Sami</footer>
+        </>
       )}
-    </>
+    </Container>
   );
 };
 
