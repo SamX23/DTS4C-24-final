@@ -1,46 +1,39 @@
 import { useEffect, useState } from "react";
-import { TMDB_IMG, TMDB_KEY, TMDB_URL } from "../hooks/env";
+import MovieCard from "../components/MovieCard";
+import { TMDB_KEY, TMDB_URL } from "../hooks/env";
+import { useStore } from "../hooks/store";
 
 const Home = () => {
-  const [data, setData] = useState(null);
+  const movieList = useStore((state) => state.movieList);
+  const dispatch = useStore((state) => state.dispatch);
 
   useEffect(() => {
+    let isMounted = true;
     fetch(`${TMDB_URL}/trending/movie/week?api_key=${TMDB_KEY}`)
       .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setData(res.results);
-      });
+      .then(
+        (res) =>
+          isMounted &&
+          dispatch({
+            type: "ADD_MOVIE",
+            data: res.results,
+          })
+      );
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
     <>
-      <main className="my-14">
-        <h1 className="font-bold">Movie list here</h1>
+      <h1 className="font-bold">Movie list here</h1>
 
-        <div className="flex gap-2 flex-wrap justify-center my-4">
-          {data?.map((item) => (
-            <div
-              key={item.id}
-              className="border border-l-slate-400 rounded p-4 hover:bg-slate-700 w-1/4"
-            >
-              <img
-                src={`${TMDB_IMG}/${item.poster_path}`}
-                alt={item.title}
-                width="100%"
-                height="100%"
-                className="rounded"
-              />
-              <p>{item.title}</p>
-              <p className="text-slate-500 overflow-hidden h-36">
-                {item.overview}
-              </p>
-            </div>
-          ))}
-        </div>
-      </main>
-
-      <footer>Made with coffee by Sami</footer>
+      <div className="flex gap-2 flex-wrap justify-center my-4">
+        {movieList?.map((item, index) => (
+          <MovieCard data={item} key={index} wishlist />
+        ))}
+      </div>
     </>
   );
 };
