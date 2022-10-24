@@ -1,15 +1,15 @@
 import { useRef } from "react";
 import { FaRegBookmark } from "react-icons/fa";
 import { BiDetail } from "react-icons/bi";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { TMDB_IMG } from "../hooks/env";
-import { useStore } from "../hooks/store";
+import { useMovieStore } from "../hooks/store";
 import Button from "./Button";
+import { toastProperties } from "../constants/toastProperties";
 
 const MovieCard = ({ data, wishlist = false }) => {
   const { id, title, poster_path, overview } = data;
-  const dispatch = useStore((state) => state.dispatch);
+  const dispatch = useMovieStore((state) => state.dispatch);
   const movieCard = useRef();
 
   const handleClick = (e) => {
@@ -23,16 +23,7 @@ const MovieCard = ({ data, wishlist = false }) => {
       },
     });
 
-    toast.success(`${title} added to wishlist!`, {
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: false,
-      progress: undefined,
-      theme: "dark",
-    });
+    toast.success(`${title} added to wishlist!`, toastProperties);
   };
 
   return (
