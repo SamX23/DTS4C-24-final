@@ -1,4 +1,5 @@
 import create from "zustand";
+import { persist } from "zustand/middleware";
 
 const reducer = (state, { type, data }) => {
   switch (type) {
@@ -18,11 +19,13 @@ const reducer = (state, { type, data }) => {
   }
 };
 
-const useStore = create((set) => ({
-  user: sessionStorage.getItem("user"),
-  wishlist: [],
-  movieList: [],
-  dispatch: (args) => set((state) => reducer(state, args)),
-}));
+const useMovieStore = create(
+  persist((set) => ({
+    user: "",
+    wishlist: [],
+    movieList: [],
+    dispatch: (args) => set((state) => reducer(state, args)),
+  }))
+);
 
-export { useStore };
+export { useMovieStore };

@@ -1,3 +1,11 @@
 export const TMDB_KEY = import.meta.env.VITE_TMDB_KEY;
 export const TMDB_URL = import.meta.env.VITE_TMDB_URL;
 export const TMDB_IMG = import.meta.env.VITE_TMDB_IMG;
+export const apiKey = import.meta.env.VITE_apiKey;
+export const authDomain = import.meta.env.VITE_authDomain;
+export const databaseURL = import.meta.env.VITE_databaseURL;
+export const projectId = import.meta.env.VITE_projectId;
+export const storageBucket = import.meta.env.VITE_storageBucket;
+export const messagingSenderId = import.meta.env.VITE_messagingSenderId;
+export const appId = import.meta.env.VITE_appId;
+export const measurementId = import.meta.env.VITE_measurementId;
