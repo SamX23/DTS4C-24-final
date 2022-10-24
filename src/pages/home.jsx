@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import MovieCard from "../components/MovieCard";
 import { TMDB_KEY, TMDB_URL } from "../hooks/env";
-import { useStore } from "../hooks/store";
+import { useMovieStore } from "../hooks/store";
 
 const Home = () => {
-  const movieList = useStore((state) => state.movieList);
-  const dispatch = useStore((state) => state.dispatch);
+  const movieList = useMovieStore((state) => state.movieList);
+  const dispatch = useMovieStore((state) => state.dispatch);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

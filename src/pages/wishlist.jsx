@@ -1,8 +1,8 @@
 import MovieCard from "../components/MovieCard";
-import { useStore } from "../hooks/store";
+import { useMovieStore } from "../hooks/store";
 
 const Wishlist = () => {
-  const wishlist = useStore((state) => state.wishlist);
+  const wishlist = useMovieStore((state) => state.wishlist);
 
   return (
     <>
