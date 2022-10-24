@@ -11,7 +11,7 @@ const Navigation = () => {
   return (
     <nav className="fixed left-0 top-0 px-4 py-3 bg-slate-700 w-full flex justify-between items-center">
       <Link to="/">
-        <h1>Nonton Movie</h1>
+        <h1 className="font-bold uppercase">Nonton Movie</h1>
       </Link>
       <div className="flex bg-white rounded-full p-2 text-black items-center">
         <FaSearch className="mx-2" />
@@ -24,18 +24,14 @@ const Navigation = () => {
         />
       </div>
       <div className="flex gap-3">
-        <Link to="wishlist">
-          <Button>
-            <FaRegBookmark className="mr-2" />
-            Wishlist
-          </Button>
-        </Link>
-        <Link to="profile">
-          <Button>
-            <FaUser className="mr-2" />
-            Profile
-          </Button>
-        </Link>
+        <Button to="wishlist" navigation>
+          <FaRegBookmark className="mr-2" />
+          Wishlist
+        </Button>
+        <Button to="profile" navigation>
+          <FaUser className="mr-2" />
+          Profile
+        </Button>
         <Button onClick={() => logout()}>
           <FaSignOutAlt className="mr-2" />
           Logout

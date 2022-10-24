@@ -7,6 +7,7 @@ import Login from "./pages/login";
 import Profile from "./pages/profile";
 import Wishlist from "./pages/wishlist";
 import "react-toastify/dist/ReactToastify.css";
+import { BubblyContainer } from "react-bubbly-transitions";
 
 function App() {
   return (
@@ -34,6 +35,8 @@ function App() {
           pauseOnHover={false}
           theme="dark"
         />
+
+        <BubblyContainer />
       </AuthProvider>
     </BrowserRouter>
   );
