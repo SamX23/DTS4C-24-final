@@ -43,9 +43,9 @@ const MovieCard = ({ data, wishlist = false }) => {
       <img
         src={`${TMDB_IMG}/${poster_path}`}
         alt={title}
-        width="100%"
-        height="100%"
-        className="rounded"
+        width="200px"
+        height="300px"
+        className="rounded bg-slate-400"
         loading="lazy"
       />
       <h2 className="my-2">{title}</h2>
@@ -54,12 +54,14 @@ const MovieCard = ({ data, wishlist = false }) => {
       </p>
 
       <div className="flex flex-col lg:flex-row justify-between items-center mt-2 gap-2">
-        <Link to={`/detail/${id}`}>
-          <Button className="rounded bg-emerald-600 px-3 py-1">
-            <BiDetail className="mr-2" />
-            Details
-          </Button>
-        </Link>
+        <Button
+          navigation
+          to={`/detail/${id}`}
+          className="rounded bg-emerald-600 px-3 py-1"
+        >
+          <BiDetail className="mr-2" />
+          Details
+        </Button>
         {wishlist && (
           <Button
             className="rounded bg-slate-600 px-3 py-1"
