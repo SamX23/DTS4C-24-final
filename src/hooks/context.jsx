@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async ({ email, password }) =>
     signInWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => dispatch({ type: "LOGIN", data: user.accessToken }))
+      .then(({ user }) => dispatch({ type: "LOGIN", data: user }))
       .catch(({ message }) => toast.error(message, toastProperties));
 
   const logout = () =>
