@@ -8,6 +8,7 @@ import Profile from "./pages/profile";
 import Wishlist from "./pages/wishlist";
 import "react-toastify/dist/ReactToastify.css";
 import { BubblyContainer } from "react-bubbly-transitions";
+import Detail from "./pages/detail";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/detail/:id" element={<Detail />} />
           </Route>
 
           <Route path="/login" element={<Login />} />

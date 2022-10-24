@@ -1,7 +1,11 @@
 import { useRef } from "react";
+import { FaRegBookmark } from "react-icons/fa";
+import { BiDetail } from "react-icons/bi";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { TMDB_IMG } from "../hooks/env";
 import { useStore } from "../hooks/store";
+import Button from "./Button";
 
 const MovieCard = ({ data, wishlist = false }) => {
   const { id, title, poster_path, overview } = data;
@@ -49,14 +53,23 @@ const MovieCard = ({ data, wishlist = false }) => {
         {overview}
       </p>
 
-      {wishlist && (
-        <button
-          className="rounded bg-slate-400 px-3 py-2 mt-2"
-          onClick={handleClick}
-        >
-          Wishlist
-        </button>
-      )}
+      <div className="flex flex-col lg:flex-row justify-between items-center mt-2 gap-2">
+        <Link to={`/detail/${id}`}>
+          <Button className="rounded bg-emerald-600 px-3 py-1">
+            <BiDetail className="mr-2" />
+            Details
+          </Button>
+        </Link>
+        {wishlist && (
+          <Button
+            className="rounded bg-slate-600 px-3 py-1"
+            onClick={handleClick}
+          >
+            <FaRegBookmark className="mr-2" />
+            Wishlist
+          </Button>
+        )}
+      </div>
     </div>
   );
 };
