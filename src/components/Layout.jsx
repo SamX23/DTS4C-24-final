@@ -16,7 +16,7 @@ const Layout = () => {
           <main className="my-14">
             <Outlet />
           </main>
-          <footer>Made with coffee by Sami</footer>
+          <footer className="py-4">Made with coffee by DTS4C-24 Team</footer>
         </>
       )}
     </Container>
